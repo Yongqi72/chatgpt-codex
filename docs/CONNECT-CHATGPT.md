@@ -4,7 +4,7 @@
 
 ## 安装 Skill 插件
 
-运行 scripts/Pack-Plugin.ps1 得到 out/codex-dispatch-v0.2.1.zip。已有插件使用其更新入口，保留身份与连接；首次安装使用账号当前支持的插件/Skill 导入入口。开始新会话，确认可以选择 codex-dispatch。若账号没有导入入口，按官方插件/Skills 文档检查可用性，不能用聊天附件代替账号安装。
+运行 scripts/Pack-Plugin.ps1 得到 out/codex-dispatch-v0.2.2.zip。已有插件使用其更新入口，保留身份与连接；首次安装使用账号当前支持的插件/Skill 导入入口。开始新会话，确认可以选择 codex-dispatch。若账号没有导入入口，按官方插件/Skills 文档检查可用性，不能用聊天附件代替账号安装。
 
 以下为历史版本变化，0.2.1 已删除权限档位门槛，当前使用 [单文件交接规约](SINGLE-FILE-HANDOFF.md)。0.2.1 的新窗口定位在派发前或接收初期完成；回传复用同任务真实目标／许可核验，文件本身不产生授权。更新真实运行副本与账号插件后仍需新会话和端到端验证。
 
@@ -20,11 +20,11 @@ v0.1.19 将可信原生绑定、自动查找核验、用户直接指定／确认
 
 ## 中央 Workspace Routing
 
-v0.1.14 每次新派发读取 https://raw.githubusercontent.com/dingxifan/chatgpt-codex/main/config/CODEX_WORKSPACE_ROUTING.md 的完整当前内容。唯一权威源为 `dingxifan/chatgpt-codex` / `main` / `config/CODEX_WORKSPACE_ROUTING.md`。Project / Space 无需保存 routing table，遗留副本不参与路由。中央源读取或验证失败返回 `WORKSPACE_ROUTING_TABLE_UNAVAILABLE`，在任何 artifact 写入和 codex_start 前停止；没有 Project Files、Memory、历史、本地副本或其它仓库 fallback。
+当前安装每次新派发读取 https://raw.githubusercontent.com/Yongqi72/chatgpt-codex/main/config/CODEX_WORKSPACE_ROUTING.md 的完整当前内容。唯一权威源为 `Yongqi72/chatgpt-codex` / `main` / `config/CODEX_WORKSPACE_ROUTING.md`。Project / Space 无需保存 routing table，遗留副本不参与路由。中央源读取或验证失败返回 `WORKSPACE_ROUTING_TABLE_UNAVAILABLE`，在任何 artifact 写入和 codex_start 前停止；没有 Project Files、Memory、历史、本地副本或其它仓库 fallback。
 
 按中央表精确匹配 repository/workspace，冻结 computer、namespace 和实际工具句柄；所有 artifact_put 与 codex_start 使用同一 namespace。目标工具不在当前目录中时返回 `WORKSPACE_BRIDGE_UNAVAILABLE`，不尝试另一台机器。2026-10-06 已按用户要求核实并启用 Laptop 的 feishu-collection 和 auchi-laptop 路由；运行时状态仍以中央表本次完整读取为准。未知项目不猜测仓库身份，disabled 项需明确确认后才修改中央表。
 
-从旧版升级应使用两个 manifest 一致声明的目标版本 ZIP（当前 v0.2.1）并开始新会话，核对 Skill 内容。账号已安装相同版本且内容核验相同时不重复导入。导入 ZIP 不代表账号更新成功；Refresh tools 也不能替代 Skill 升级。源码、构建和运行副本的核验见 [发布检查路径](RELEASE-PATH.md)，连接工具元数据仍按下文核验。
+从旧版升级应使用两个 manifest 一致声明的目标版本 ZIP（当前 v0.2.2）并开始新会话，核对 Skill 内容。账号已安装相同版本且内容核验相同时不重复导入。导入 ZIP 不代表账号更新成功；Refresh tools 也不能替代 Skill 升级。源码、构建和运行副本的核验见 [发布检查路径](RELEASE-PATH.md)，连接工具元数据仍按下文核验。
 
 ## 安装 Tunnel 客户端
 

@@ -22,7 +22,7 @@ test('Skill discovery and plugin identity remain unchanged while both release ma
   for (const relative of ['plugin/codex-dispatch/plugin.json', 'plugin/codex-dispatch/.codex-plugin/plugin.json']) {
     const current = JSON.parse(readFileSync(path.join(root, relative), 'utf8'));
     const old = JSON.parse(execFileSync('git', ['show', `${baseline}:${relative}`], { cwd: root, encoding: 'utf8' }));
-    assert.equal(current.version, '0.2.1');
+    assert.equal(current.version, '0.2.2');
     delete current.version;
     delete old.version;
     assert.deepEqual(current, old);
@@ -104,7 +104,7 @@ function routesOf(text) {
   ));
 }
 
-test('Schema 1 optional publication fields leave every legacy routing value intact', () => {
+test('owned routing authority preserves legacy routes and adds only the two confirmed workspaces', () => {
   const relative = 'config/CODEX_WORKSPACE_ROUTING.md';
   const old = execFileSync('git', ['show', `dd5a7b6185bad75b0b42f64a415a2505d2339497:${relative}`], { cwd: root, encoding: 'utf8' });
   const current = readFileSync(path.join(root, relative), 'utf8');
@@ -112,14 +112,31 @@ test('Schema 1 optional publication fields leave every legacy routing value inta
   assert.match(current, /^Schema version: 1$/m);
   const oldRoutes = routesOf(old);
   const newRoutes = routesOf(current);
-  assert.equal(newRoutes.length, oldRoutes.length);
+  assert.equal(newRoutes.length, oldRoutes.length + 2);
   assert.equal(newRoutes[0]['Publish targets'], 'https://github.com/dingxifan/chatgpt-codex.git => refs/heads/main');
   assert.match(newRoutes[0]['Publish order'], /draft PR targeting main/);
   assert.match(newRoutes[0]['Publish order'], /only when the human authorizes/);
-  for (const [index, route] of newRoutes.entries()) {
+  for (const [index, route] of newRoutes.slice(0, oldRoutes.length).entries()) {
     const { 'Publish targets': targets, 'Publish order': order, ...legacy } = route;
     assert.deepEqual(legacy, oldRoutes[index]);
     if (index > 0) assert.deepEqual([targets, order], [undefined, undefined]);
+  }
+  const canonicalUrl = 'https://raw.githubusercontent.com/Yongqi72/chatgpt-codex/main/config/CODEX_WORKSPACE_ROUTING.md';
+  assert.equal(current.match(/^Canonical URL: (.+)$/m)[1].trim(), canonicalUrl);
+  const skillRoutingUrls = [...skill.matchAll(/https:\/\/raw\.githubusercontent\.com\/[^\s`]+\/config\/CODEX_WORKSPACE_ROUTING\.md/g)].map(match => match[0]);
+  assert.deepEqual([...new Set(skillRoutingUrls)], [canonicalUrl]);
+  assert.equal(new Set(newRoutes.map(route => route['Route ID'])).size, newRoutes.length);
+  assert.equal(new Set(newRoutes.map(route => route.Workspace)).size, newRoutes.length);
+  const additions = newRoutes.slice(oldRoutes.length);
+  for (const [index, name] of ['loxson-salary-new', 'insurance-commission'].entries()) {
+    assert.deepEqual(additions[index], {
+      'Route ID': `${name}-desktop-36s8ssl`,
+      Repository: `dingxifan/${name}`,
+      Workspace: `E:\\group-code-lab-new\\${name}`,
+      Computer: 'DESKTOP-36S8SSL',
+      'Bridge namespace': 'Codex_Bridge___DESKTOP_36S8SSL',
+      Status: 'active',
+    });
   }
 });
 

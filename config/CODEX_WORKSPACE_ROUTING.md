@@ -4,9 +4,9 @@ Schema version: 1
 
 ## Runtime authority
 
-The sole runtime routing authority is repository `dingxifan/chatgpt-codex`, branch `main`, path `config/CODEX_WORKSPACE_ROUTING.md`.
+The sole runtime routing authority is repository `Yongqi72/chatgpt-codex`, branch `main`, path `config/CODEX_WORKSPACE_ROUTING.md`.
 
-Canonical URL: https://raw.githubusercontent.com/dingxifan/chatgpt-codex/main/config/CODEX_WORKSPACE_ROUTING.md
+Canonical URL: https://raw.githubusercontent.com/Yongqi72/chatgpt-codex/main/config/CODEX_WORKSPACE_ROUTING.md
 
 Read the complete current contents from this URL for every new dispatch before any artifact persistence or `codex_start`. Never reuse a previous read or cached table. All `CODEX_WORKSPACE_ROUTING.md` copies in GPT Project / Space are non-authoritative; codex-dispatch must not read routing tables from Project Files. Memory, historical dispatches, local copies and other repository copies are not fallback sources. If the canonical URL cannot be read completely or the table is invalid, stop with `WORKSPACE_ROUTING_TABLE_UNAVAILABLE`.
 
@@ -88,3 +88,25 @@ Bridge namespace: Codex_Bridge___DESKTOP_6CNV6UL
 Status: active
 
 Enabled from direct Codex execution evidence on DESKTOP_6CNV6UL showing the adopted Method repository at this exact workspace; this route supports Method maintenance dispatches without inferring from drive-letter style.
+
+## Route 7
+
+Route ID: loxson-salary-new-desktop-36s8ssl
+Repository: dingxifan/loxson-salary-new
+Workspace: E:\group-code-lab-new\loxson-salary-new
+Computer: DESKTOP-36S8SSL
+Bridge namespace: Codex_Bridge___DESKTOP_36S8SSL
+Status: active
+
+The repository identity is verified from the workspace origin at https://gitee.com/dingxifan/loxson-salary-new.git. The local Desktop project path and allowlist match this exact workspace. Bridge namespace was verified through tool discovery in the user's connected ChatGPT conversation.
+
+## Route 8
+
+Route ID: insurance-commission-desktop-36s8ssl
+Repository: dingxifan/insurance-commission
+Workspace: E:\group-code-lab-new\insurance-commission
+Computer: DESKTOP-36S8SSL
+Bridge namespace: Codex_Bridge___DESKTOP_36S8SSL
+Status: active
+
+The repository identity is verified from the workspace origin at https://gitee.com/dingxifan/insurance-commission.git. The local Desktop project path and allowlist match this exact workspace. Bridge namespace was verified through tool discovery in the user's connected ChatGPT conversation.
