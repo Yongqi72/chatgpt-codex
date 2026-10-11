@@ -1,10 +1,10 @@
 # 发布与实际生效核验
 
-本仓库唯一维护路径为 `E:\tools\codex-from-chatgpt`，origin 为 `dingxifan/chatgpt-codex`。安装、构建、部署、账户插件更新和会话工具刷新分别验收；Git 更新或相同版本号不证明运行副本已经更新。本文件是检查流程和一次事实快照，不是任务／状态数据库。
+本用户安装的维护路径为 `E:\group-code-lab-new\chatgpt-codex`，origin 为 `Yongqi72/chatgpt-codex`。该仓库的发布沿用任务分支、draft PR、审阅及获用户授权后合并 main；不向上游仓库推送。下文其他电脑的记录保留为历史快照。安装、构建、部署、账户插件更新和会话工具刷新分别验收；Git 更新或相同版本号不证明运行副本已经更新。本文件是检查流程和一次事实快照，不是任务／状态数据库。
 
 ## 版本约定
 
-- Dispatch 插件版本以 `plugin/codex-dispatch/plugin.json` 和 `.codex-plugin/plugin.json` 的一致声明为准，当前为 `0.2.0`。Skill 正文没有版本标签，以 SHA256 比较内容。0.2.0 的单文件输入与旧 workspace/prompt 接口不同，Bridge 和账号 Skill 必须一同更新，并核验实际加载定义。
+- Dispatch 插件版本以 `plugin/codex-dispatch/plugin.json` 和 `.codex-plugin/plugin.json` 的一致声明为准，当前为 `0.2.2`。Skill 正文没有版本标签，以 SHA256 比较内容。0.2.0 的单文件输入与旧 workspace/prompt 接口不同，Bridge 和账号 Skill 必须一同更新，并核验实际加载定义。
 - Bridge package 和 MCP server 保留上游包版本 `0.3.1`。它与插件分开编号，不能把插件版本写到 Bridge 上来制造一致性。相同 Bridge 包版本的补丁用 Git commit、dirty 状态、源码／产物摘要和工具定义辨别。
 - 路由文档中 `v0.1.14` 表示中央路由引入版本，Laptop 升级文档和旧安装记录是历史快照；不批量改写历史版本。
 - 插件内容改变且要发布时，按现有语义版本约定同时更新两个 manifest，保留旧 ZIP。只有文档／发布检查改动且插件内容不变时无需增加插件版本。下文第一阶段快照没有更改 Skill 或工具接口；后续 Skill／源码变更仍按各层分别发布核验，不能把该历史结论套到当前修改。

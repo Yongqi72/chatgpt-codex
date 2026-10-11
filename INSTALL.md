@@ -1,6 +1,6 @@
 # Windows 安装流程
 
-当前源码插件为 0.2.1，使用单文件入口与 kernel，沿用窗口现有权限，不设权限档位匹配门槛。接口及证据边界见 [单文件交接](docs/SINGLE-FILE-HANDOFF.md)。下文旧信封／LINT 版本说明仅为 0.1.x 历史记录，不能作为当前输入规约。
+当前源码插件为 0.2.2，使用单文件入口与 kernel，沿用窗口现有权限，不设权限档位匹配门槛。接口及证据边界见 [单文件交接](docs/SINGLE-FILE-HANDOFF.md)。下文旧信封／LINT 版本说明仅为 0.1.x 历史记录，不能作为当前输入规约。
 
 本工作树含 0.2.0 单文件交接实现，启动／查询参数与已发布 v0.1.19 不同，见 [候选接口与边界](docs/SINGLE-FILE-HANDOFF.md)。下文保留已发布版本的安装说明；本轮只做本地实现和离线验证，没有执行安装、服务重启或账号更新。
 
@@ -89,7 +89,7 @@ codex_start 输入参数和工具集合不变，输出新增 `creation_status`�
 
 ## 5. 连接 ChatGPT
 
-v0.1.14 的路由唯一权威源是 `dingxifan/chatgpt-codex` 的 `main/config/CODEX_WORKSPACE_ROUTING.md`，固定读取地址为 https://raw.githubusercontent.com/dingxifan/chatgpt-codex/main/config/CODEX_WORKSPACE_ROUTING.md 。无需在任何 GPT Project / Space 上传 routing table；旧副本被忽略。每次新派发重新读取完整中央表，读取失败即在 artifact 写入和派发前停止，不使用缓存、本地副本或其它 Bridge。新机器的实际 repository/workspace、computer 和工具 namespace 必须明确配置到中央表并确认后启用；本地 allowlist 不能代替中央路由。
+当前安装的路由唯一权威源是 `Yongqi72/chatgpt-codex` 的 `main/config/CODEX_WORKSPACE_ROUTING.md`，固定读取地址为 https://raw.githubusercontent.com/Yongqi72/chatgpt-codex/main/config/CODEX_WORKSPACE_ROUTING.md 。无需在任何 GPT Project / Space 上传 routing table；旧副本被忽略。每次新派发重新读取完整中央表，读取失败即在 artifact 写入和派发前停止，不使用缓存、本地副本或其它 Bridge。新机器的实际 repository/workspace、computer 和工具 namespace 必须明确配置到中央表并确认后启用；本地 allowlist 不能代替中央路由。
 
 本次路由改造不改变三个 Bridge 工具接口，无需为此重启 Bridge。账号中的 Skill 仍需导入新版 ZIP 并在新会话核验；已有连接的工具元数据刷新要求继续按下面的流程处理。
 
